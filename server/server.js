@@ -24,5 +24,3 @@ app.get('/signup', (req, res) => {
 app.listen(3000, () => {
     console.log("server is listening at port 3000");
 })
-
-console.log("some random changes to see git");
