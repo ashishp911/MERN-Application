@@ -13,7 +13,6 @@ mongoose.connect(DB).then(() => {
 // Adding middleware
 const middleware = (req, res, next) =>{
     console.log(`Hello from middleware`);
-    console.log("Some changes");
     // About will only load when next() function will be called, (used for authentication)
     next(); 
 } 
