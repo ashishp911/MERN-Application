@@ -4,7 +4,7 @@ const app = express();
 
 // Database
 
-const DB = 'mongodb+srv://ashishpatil35:m001-mongodb-basics@cluster0.vragthl.mongodb.net/mernStack?retryWrites=true&w=majority'
+const DB = 'mongodb+srv://ashishpatil35:<password>@cluster0.vragthl.mongodb.net/mernStack?retryWrites=true&w=majority'
 
 mongoose.connect(DB).then(() => {
     console.log("connection successful");
