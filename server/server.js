@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 const express = require('express');
 const app = express();
-
+const dotenv = require('dotenv');
 // Database
-
-const DB = 'mongodb+srv://ashishpatil35:<password>@cluster0.vragthl.mongodb.net/mernStack?retryWrites=true&w=majority'
+dotenv.config({path:'./config.env'})
+const DB = process.env.DATABASE
 
 mongoose.connect(DB).then(() => {
     console.log("connection successful");
