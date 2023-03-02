@@ -1,8 +1,16 @@
+const mongoose = require('mongoose')
 const express = require('express');
 const app = express();
 
-// Adding middleware
+// Database
 
+const DB = 'mongodb+srv://ashishpatil35:m001-mongodb-basics@cluster0.vragthl.mongodb.net/mernStack?retryWrites=true&w=majority'
+
+mongoose.connect(DB).then(() => {
+    console.log("connection successful");
+}).catch((err) => console.log("Connection failed"))
+
+// Adding middleware
 const middleware = (req, res, next) =>{
     console.log(`Hello from middleware`);
     // About will only load when next() function will be called, (used for authentication)
