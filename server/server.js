@@ -2,9 +2,11 @@ const mongoose = require('mongoose')
 const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
+
 // Database
 dotenv.config({path:'./config.env'})
 const DB = process.env.DATABASE
+const PORT = process.env.PORT
 
 mongoose.connect(DB).then(() => {
     console.log("connection successful");
@@ -38,6 +40,6 @@ app.get('/signup', (req, res) => {
     res.send("Hello world from signup.")
 });
 
-app.listen(3000, () => {
-    console.log("server is listening at port 3000");
+app.listen(PORT, () => {
+    console.log(`server is listening at port ${PORT}`);
 })
