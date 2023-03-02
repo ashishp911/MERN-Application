@@ -1,11 +1,20 @@
 const express = require('express');
 const app = express();
 
+// Adding middleware
+
+const middleware = (req, res, next) =>{
+    console.log(`Hello from middleware`);
+    // About will only load when next() function will be called, (used for authentication)
+    next(); 
+} 
+
+
 app.get('/', (req, res) => {
     res.send("Hello world from server.")
 });
 
-app.get('/about', (req, res) => {
+app.get('/about', middleware,(req, res) => {
     res.send("Hello world from about.")
 });
 
