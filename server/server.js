@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 const express = require('express');
 const app = express();
-
+const dotenv = require('dotenv');
 // Database
-
-const DB = 'mongodb+srv://ashishpatil35:m001-mongodb-basics@cluster0.vragthl.mongodb.net/mernStack?retryWrites=true&w=majority'
+dotenv.config({path:'./config.env'})
+const DB = process.env.DATABASE
 
 mongoose.connect(DB).then(() => {
     console.log("connection successful");
@@ -13,6 +13,7 @@ mongoose.connect(DB).then(() => {
 // Adding middleware
 const middleware = (req, res, next) =>{
     console.log(`Hello from middleware`);
+    console.log("Some ranfpdmasdcls");
     // About will only load when next() function will be called, (used for authentication)
     next(); 
 } 
