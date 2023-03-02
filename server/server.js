@@ -1,16 +1,11 @@
-const mongoose = require('mongoose')
 const express = require('express');
 const app = express();
 const dotenv = require('dotenv');
 
 // Database
 dotenv.config({path:'./config.env'})
-const DB = process.env.DATABASE
 const PORT = process.env.PORT
-
-mongoose.connect(DB).then(() => {
-    console.log("connection successful");
-}).catch((err) => console.log("Connection failed"))
+require('./db/conn')
 
 // Adding middleware
 const middleware = (req, res, next) =>{
