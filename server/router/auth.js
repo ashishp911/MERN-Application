@@ -8,6 +8,7 @@ router.get("/", (req, res) => {
   res.send("Hello world from server auth.js .");
 });
 
+// this is registration route, since we are getting data from from end, we use POST method.
 router.post("/register", async (req, res) => {
     console.log(req.body);
     // res.json({message : req.body});
@@ -15,7 +16,7 @@ router.post("/register", async (req, res) => {
     // object destructuring
     const { name, email, phone, work, password, cpassword } = req.body;
     if (!name || !email || !phone || !work || !password || !cpassword) {
-      return res.status(422).json({ Error: "Please fill all fields " });
+      return res.status(422).json({ Error: "Please fill all fields." });
     }
     try{
         const userExist = await User.findOne({ email: email }) 
@@ -32,4 +33,30 @@ router.post("/register", async (req, res) => {
 
   });
 
+// Now to validate login creds
+
+router.post("/signin", async (req, res) => {
+    // console.log(req.body);
+    // res.send({message : "Awesome"})
+    try {
+        const { email, password } = req.body;
+        if ( !email || !password){
+            res.status(400).json({ Error: "Please fill all fields." });
+        }
+        
+        const userEmail = await User.findOne({ email: email })
+
+        if (!userEmail){
+            res.status(400).json({ Error: "Invalid credentials." });
+            // console.log("Invalid credentials");
+        }
+        else{
+            res.status(201).json({"message" : "Login successful."});
+        } 
+
+    } catch (err) {
+        console.log(err);
+    }
+
+})
 module.exports = router;
