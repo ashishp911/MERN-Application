@@ -7,7 +7,8 @@ dotenv.config({path:'./config.env'})
 const PORT = process.env.PORT
 require('./db/conn')
 const User = require('./model/userSchema')
-
+app.use(express.json());
+app.use(require('./router/auth'))
 // Adding middleware
 const middleware = (req, res, next) =>{
     console.log(`Hello from middleware`);
@@ -15,10 +16,12 @@ const middleware = (req, res, next) =>{
     next(); 
 } 
 
+// Linking the router files 
 
-app.get('/', (req, res) => {
-    res.send("Hello world from server.")
-});
+
+// app.get('/', (req, res) => {
+//     res.send("Hello world from server.")
+// });
 
 app.get('/about', middleware,(req, res) => {
     res.send("Hello world from about.")
