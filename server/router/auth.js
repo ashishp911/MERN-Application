@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require('bcryptjs')
 
 require("../db/conn");
 const User = require("../model/userSchema");
@@ -10,7 +11,7 @@ router.get("/", (req, res) => {
 
 // this is registration route, since we are getting data from from end, we use POST method.
 router.post("/register", async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     // res.json({message : req.body});
   
     // object destructuring
@@ -22,8 +23,10 @@ router.post("/register", async (req, res) => {
         const userExist = await User.findOne({ email: email }) 
         if (userExist) {
             return res.status(422).json({ Error: "Email Id already exists." });
+          }else if (password != cpassword){
+            return res.status(422).json({ Error: "Passwords not matching." });
           }
-        const user = new User({ name, email, phone, work, password, cpassword });  
+        const user = new User({ name, email, phone, work, password, cpassword});  
         const userRegister = await user.save();
         res.status(201).json({ Message: "User registered succesfully." });  
 
@@ -45,13 +48,15 @@ router.post("/signin", async (req, res) => {
         }
         
         const userEmail = await User.findOne({ email: email })
-
-        if (!userEmail){
+        // console.log(userEmail);
+        
+        // Comparing both the hashes for password verification
+        const isMatch = await bcrypt.compare(password, userEmail.password)
+        if(!isMatch){
             res.status(400).json({ Error: "Invalid credentials." });
-            // console.log("Invalid credentials");
         }
         else{
-            res.status(201).json({"message" : "Login successful."});
+            res.status(201).json({message : "Login successful."});
         } 
 
     } catch (err) {
