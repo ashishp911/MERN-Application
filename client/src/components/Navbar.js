@@ -1,12 +1,17 @@
 import React from "react";
+import logo from "../Images/Patil_Logo.jpg"
+import logo2 from "../Images/Patil_Logo2.jpg"
+import logo3 from "../Images/Patil_Logo3.jpg"
+import {Link,} from "react-router-dom";
+
 const Navbar = () => {
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-dark-subtle text-emphasis-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            Navbar
-          </a>
+          <Link className="navbar-brand" to="#">
+            <img src={logo3} alt=" logo" />
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -21,29 +26,29 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item mx-3">
-                <a className="nav-link active" aria-current="page" href="/">
+                <Link className="nav-link active" aria-current="page" to="/">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item mx-3">
-                <a className="nav-link active" href="/about">
+                <Link className="nav-link active" to="/about">
                   About
-                </a>
+                </Link>
               </li>
               <li className="nav-item mx-3">
-                <a className="nav-link active" href="/contact">
+                <Link className="nav-link active" to="/contact">
                   Contact
-                </a>
+                </Link>
               </li>
               <li className="nav-item mx-3">
-                <a className="nav-link active" href="/login">
+                <Link className="nav-link active" to="/login">
                   Login
-                </a>
+                </Link>
               </li>
               <li className="nav-item mx-1">
-                <a className="nav-link active" href="/signup">
+                <Link className="nav-link active" to="/signup">
                   Register
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
