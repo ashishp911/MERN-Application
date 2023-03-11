@@ -96,7 +96,7 @@ const Signup = () => {
             <input type="submit" value="REGISTER" name="signup" id="signup"/>
           </div>
           <div className="row mt-2">
-          <Link className="nav-link active" to="/login">
+          <Link className="nav-link active" to="/login" id="alreadyRegistered">
                   I'm already registered
             </Link>
           </div>
