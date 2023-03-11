@@ -97,7 +97,7 @@ const Signup = () => {
           </div>
           <div className="row mt-2">
           <Link className="nav-link active" to="/login" id="alreadyRegistered">
-                  I'm already registered
+                I'm already registered
             </Link>
           </div>
 
