@@ -1,4 +1,4 @@
-h1 { 
+/* h1 { 
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -6,7 +6,6 @@ h1 {
 form {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
   }
 
   label {
@@ -62,4 +61,4 @@ form {
     font-size: xx-large;
     color: crimson;
   }
-
+ */
