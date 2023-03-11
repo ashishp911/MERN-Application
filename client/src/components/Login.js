@@ -101,15 +101,17 @@ const Login = () => {
               />
               <Button
                 type="submit"
+                name="signin"
+                id="signin"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign In
               </Button>
-              <Grid container>
+              <Grid container justifyContent="center" >
                 <Grid item>
-                  <Link href="/login" variant="body2">
+                  <Link href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
