@@ -78,6 +78,7 @@ const Login = () => {
                 margin="normal"
                 required
                 fullWidth
+                type="email"
                 id="email"
                 name="email"
                 autoComplete="email"
@@ -85,7 +86,6 @@ const Login = () => {
               />
               <TextField
                 label="Password"
-                multiline
                 rows={1}
                 InputLabelProps={{
                   style: { marginLeft: "1px" },
@@ -97,7 +97,7 @@ const Login = () => {
                 name="password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="new-password"
               />
               <Button
                 type="submit"
