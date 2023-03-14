@@ -161,7 +161,7 @@ const Signup = () => {
                     label="Name"
                     name="name"
                     id="name"
-                    type={Text}
+                    type="text"
                     autoComplete="off"
                     required
                     fullWidth
@@ -173,6 +173,7 @@ const Signup = () => {
                     label="Phone Number"
                     name="pnumber"
                     id="pnumber"
+                    type="number"
                     autoComplete="off"
                     required
                     fullWidth
@@ -188,6 +189,7 @@ const Signup = () => {
                     required
                     fullWidth
                     autoFocus
+                    type="text"
                   />
                 </Grid>
                 <Grid item xs={12}>

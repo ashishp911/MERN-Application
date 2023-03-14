@@ -79,8 +79,8 @@ const Login = () => {
                 required
                 fullWidth
                 type="email"
-                id="email"
-                name="email"
+                id="login_email"
+                name="login_email"
                 autoComplete="email"
                 autoFocus
               />
@@ -94,9 +94,9 @@ const Login = () => {
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+                name="login_password"
                 type="password"
-                id="password"
+                id="login_password"
                 autoComplete="new-password"
               />
               <Button

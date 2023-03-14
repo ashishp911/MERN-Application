@@ -48,32 +48,44 @@ const Contact = () => {
             </Typography>
             <Box
               component="form"
+              id="contact-form"
               onSubmit={handleSubmit}
               noValidate
               sx={{ mt: 4, width: 700 }}
             >
               <TextField
                 label="Name"
-                name="name"
-                id="name"
+                name="contact_form_name"
+                id="contact_form_name"
                 autoComplete="off"
                 required
                 fullWidth
                 autoFocus
+                type = "text"
                 value={name}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="email"
                 label="Email Address"
-                name="email"
+                name="contact_form_email"
+                id="contact_form_email"
                 autoComplete="email"
                 autoFocus
                 value={email}
+                type = "email"
               />
-          
+              <TextField
+                label="Phone Number"
+                name="contact_form_pnumber"
+                id="contact_form_pnumber"
+                autoComplete="off"
+                required
+                fullWidth
+                autoFocus
+                type = "number"
+              />
               <TextField
                 label="Message"
                 variant="outlined"
@@ -83,6 +95,7 @@ const Contact = () => {
                 multiline
                 rows={6}
                 value={message}
+                type = "text"
                 onChange={(event) => setMessage(event.target.value)}
               />
 
@@ -119,11 +132,18 @@ const Contact = () => {
           </section>
         </div>
         {/* Copyright */}
-        <div className="text-center p-2" style={{backgroundColor: 'rgba(0, 0, 0, 0.2)'}}>
+        <div
+          className="text-center p-2"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+        >
           © 2020 Copyright:
-          <a className="text-dark" href="https://en.wikipedia.org/wiki/April_Fools%27_Day">xyzpatil.com</a>
+          <a
+            className="text-dark"
+            href="https://en.wikipedia.org/wiki/April_Fools%27_Day"
+          >
+            xyzpatil.com
+          </a>
         </div>
-        {/* Copyright */}
       </footer>
     </>
   );
