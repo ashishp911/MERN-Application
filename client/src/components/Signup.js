@@ -161,6 +161,7 @@ const Signup = () => {
                     label="Name"
                     name="name"
                     id="name"
+                    type={Text}
                     autoComplete="off"
                     required
                     fullWidth
@@ -170,8 +171,8 @@ const Signup = () => {
                 <Grid item xs={12}>
                   <TextField
                     label="Phone Number"
-                    name="name"
-                    id="name"
+                    name="pnumber"
+                    id="pnumber"
                     autoComplete="off"
                     required
                     fullWidth
@@ -181,8 +182,8 @@ const Signup = () => {
                 <Grid item xs={12}>
                   <TextField
                     label="Profession"
-                    name="name"
-                    id="name"
+                    name="work"
+                    id="work"
                     autoComplete="off"
                     required
                     fullWidth
@@ -193,10 +194,11 @@ const Signup = () => {
                   <TextField
                     required
                     fullWidth
-                    id="email"
                     label="Email Address"
+                    id="email"
                     name="email"
                     autoComplete="email"
+                    type="email"
                   />
                 </Grid>
                 <Grid item xs={12}>

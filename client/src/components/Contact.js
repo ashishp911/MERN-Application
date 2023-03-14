@@ -99,20 +99,20 @@ const Contact = () => {
         </Container>
       </ThemeProvider>
       <br />
-      <footer className="bg-light text-center mt-3">
+      <footer className="bg-light text-center mt-4">
         <div className="container p-2">
           <section className>
             <div className="row">
               <div className="col-4">
-                <h2>Phone</h2>
+                <h4>Phone</h4>
                 <h5>716-999-9990</h5>
               </div>
               <div className="col-4">
-                <h2>Email</h2>
+                <h4>Email</h4>
                 <h5>xyz@patil.com</h5>
               </div>
               <div className="col-4">
-                <h2>Address</h2>
+                <h4>Address</h4>
                 <h5>Pune, MH</h5>
               </div>
             </div>
