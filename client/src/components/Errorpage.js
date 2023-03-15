@@ -35,7 +35,7 @@ const Errorpage = () => {
     <>
       <div style={styles.container}>
         <div style={styles.content}>
-          <h1 style={styles.heading}>Error 404!</h1>
+          <h1 style={styles.heading}>Error 404, Page not found</h1>
           <button style={styles.button}>
           <NavLink to="/">Go back to main Page</NavLink>
         </button>
