@@ -26,7 +26,7 @@ const About = () => {
     paragraph: {
       fontSize: "1.5rem",
       lineHeight: "1.5",
-      textAlign: "center",
+      textAlign: "justify",
     },
   };
   return (
