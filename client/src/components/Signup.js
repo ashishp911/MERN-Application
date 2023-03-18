@@ -15,6 +15,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useState } from "react";
 
 const theme = createTheme();
 
@@ -23,6 +24,20 @@ const Signup = () => {
     border: "3px solid rgba(0, 0, 0, 0.3)",
   };
 
+  // useState to get all data
+  const [user, setUser] = useState({
+    name:"",
+    email:"",
+    pnumber:"",
+    work:"",
+    password:"",
+    cpassword:"",
+  })
+
+  const handleInputs = (e) => {
+    const { name, value } = e.target;
+    setUser({...user, [name]:value});
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -166,6 +181,8 @@ const Signup = () => {
                     required
                     fullWidth
                     autoFocus
+                    value={user.name}
+                    onChange = {handleInputs}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -178,6 +195,8 @@ const Signup = () => {
                     required
                     fullWidth
                     autoFocus
+                    value={user.pnumber}
+                    onChange = {handleInputs}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -190,6 +209,8 @@ const Signup = () => {
                     fullWidth
                     autoFocus
                     type="text"
+                    value={user.work}
+                    onChange = {handleInputs}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -201,6 +222,8 @@ const Signup = () => {
                     name="email"
                     autoComplete="email"
                     type="email"
+                    value={user.email}
+                    onChange = {handleInputs}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -212,6 +235,8 @@ const Signup = () => {
                     type="password"
                     id="password"
                     autoComplete="new-password"
+                    value={user.password}
+                    onChange = {handleInputs}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -222,8 +247,9 @@ const Signup = () => {
                     name="cpassword"
                     id="cpassword"
                     type="password"
-                    // autoComplete="off"
                     autoComplete="new-password"
+                    value={user.cpassword}
+                    onChange = {handleInputs}
                   />
                 </Grid>
               </Grid>
