@@ -14,7 +14,6 @@ router.get("/", (req, res) => {
 router.post("/register", async (req, res) => {
   // console.log(req.body);
   // res.json({message : req.body});
-
   try {
     // object destructuring
     const { name, email, phone, work, password, cpassword } = req.body;

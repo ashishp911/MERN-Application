@@ -6,8 +6,8 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import Checkbox from "@mui/material/Checkbox";
 import Link from '@mui/material/Link';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -16,19 +16,21 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
 const Signup = () => {
-  const borderStyles = {
-    border: "3px solid rgba(0, 0, 0, 0.3)",
-  };
+  const navigate = useNavigate();
+  // const borderStyles = {
+  //   border: "3px solid rgba(0, 0, 0, 0.3)",
+  // };
 
   // useState to get all data
   const [user, setUser] = useState({
     name:"",
     email:"",
-    pnumber:"",
+    phone:"",
     work:"",
     password:"",
     cpassword:"",
@@ -38,13 +40,35 @@ const Signup = () => {
     const { name, value } = e.target;
     setUser({...user, [name]:value});
   }
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+
+  // Sending data(user) to backend now
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    // Object de-structuring
+    const { name, email, phone, work, password, cpassword } = user
+    const res = await fetch('/register', {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      }, 
+      body: JSON.stringify({name, email, phone, work, password, cpassword})
     });
+
+    const data = await res.json();
+    if(data.status === 422 || !data){
+      window.alert("Registration failed");
+      console.log("Registration failed");
+    }
+    else{
+      window.alert("Registration successful");
+      console.log("Registration successful");
+
+      // Once registration is succesful, user should go to /login
+      navigate("/login")
+    }
+
   };
 
   return (
@@ -167,7 +191,8 @@ const Signup = () => {
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              // onSubmit={handleSubmit}
+              method="POST"
               sx={{ mt: 3 }}
             >
               <Grid container spacing={2}>
@@ -188,14 +213,14 @@ const Signup = () => {
                 <Grid item xs={12}>
                   <TextField
                     label="Phone Number"
-                    name="pnumber"
-                    id="pnumber"
+                    name="phone"
+                    id="phone"
                     type="number"
                     autoComplete="off"
                     required
                     fullWidth
                     autoFocus
-                    value={user.pnumber}
+                    value={user.phone}
                     onChange = {handleInputs}
                   />
                 </Grid>
@@ -258,6 +283,7 @@ const Signup = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
               >
                 Sign Up
               </Button>
