@@ -48,6 +48,7 @@ const Signup = () => {
     e.preventDefault()
     const res = await fetch('/register', {
       method:"POST",
+      credentials: 'include',
       headers:{
         "Content-Type":"application/json"
       }, 
