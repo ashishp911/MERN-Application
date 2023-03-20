@@ -13,19 +13,47 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 const theme = createTheme();
 
 const Login = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({
+    login_email: "",
+    login_password: "",
+  });
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
   };
+
+  // Sending data to backend using fetch API
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { login_email, login_password } = userData;
+    const res = await fetch("/login", {
+      method: "POST",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: login_email, password: login_password }),
+    });
+
+    const data = await res.json();
+    if (res.status === 400 || !data) {
+      window.alert("Invalid Credentials");
+      console.log("Registration failed");
+    } else {
+      window.alert("User logged in  successfully");
+      console.log("User logged in successfully");
+      navigate("/")
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -64,7 +92,8 @@ const Login = () => {
             <Box
               component="form"
               noValidate
-              onSubmit={handleSubmit}
+              method="POST"
+              // onSubmit={handleSubmit}
               sx={{ mt: 1, width: "50%" }}
             >
               <TextField
@@ -73,7 +102,7 @@ const Login = () => {
                 rows={1}
                 InputLabelProps={{
                   style: { marginLeft: "1px" },
-                  height: '25px',
+                  height: "25px",
                 }}
                 margin="normal"
                 required
@@ -81,15 +110,17 @@ const Login = () => {
                 type="email"
                 id="login_email"
                 name="login_email"
-                autoComplete="email"
+                autoComplete="off"
                 autoFocus
+                value={userData.login_email}
+                onChange={handleInput}
               />
               <TextField
                 label="Password"
                 rows={1}
                 InputLabelProps={{
                   style: { marginLeft: "1px" },
-                  height: '25px',
+                  height: "25px",
                 }}
                 margin="normal"
                 required
@@ -98,6 +129,8 @@ const Login = () => {
                 type="password"
                 id="login_password"
                 autoComplete="new-password"
+                value={userData.login_password}
+                onChange={handleInput}
               />
               <Button
                 type="submit"
@@ -106,10 +139,11 @@ const Login = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={handleSubmit}
               >
                 Sign In
               </Button>
-              <Grid container justifyContent="center" >
+              <Grid container justifyContent="center">
                 <Grid item>
                   <Link href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}

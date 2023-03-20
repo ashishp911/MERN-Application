@@ -37,34 +37,34 @@ router.post("/register", async (req, res) => {
 
 // Now to validate login creds
 
-router.post("/signin", async (req, res) => {
+router.post("/login", async (req, res) => {
   // console.log(req.body);
   // res.send({message : "Awesome"})
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      res.status(400).json({ Error: "Please fill all fields." });
+      console.log("HERE1");
+      return res.status(400).json({ Error: "Please fill all fields." });
     }
 
     const userEmail = await User.findOne({ email: email });
-    // console.log(userEmail);
 
     if (userEmail) {
       // Comparing both the hashes for password verification
       const isMatch = await bcrypt.compare(password, userEmail.password);
       // JWT part
-        const token = await userEmail.generateAuthToken();
-         res.cookie("jwtoken", token, {
-            expires: new Date(Date.now() + 25892000000),
-            httpOnly:true
-         })
+      const token = await userEmail.generateAuthToken();
+      res.cookie("jwtoken", token, {
+        expires: new Date(Date.now() + 25892000000),
+        httpOnly: true,
+      });
       if (!isMatch) {
         res.status(400).json({ Error: "Invalid credentials." });
       } else {
         res.status(201).json({ message: "Login successful." });
       }
     } else {
-        res.status(400).json({ Error: "Invalid credentials." });
+      res.status(400).json({ Error: "Invalid credentials." });
     }
   } catch (err) {
     console.log(err);

@@ -46,24 +46,23 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // Object de-structuring
-    const { name, email, phone, work, password, cpassword } = user
     const res = await fetch('/register', {
       method:"POST",
       headers:{
         "Content-Type":"application/json"
       }, 
-      body: JSON.stringify({name, email, phone, work, password, cpassword})
+      body: JSON.stringify(user)
     });
 
     const data = await res.json();
+
     if(data.status === 422 || !data){
       window.alert("Registration failed");
       console.log("Registration failed");
     }
     else{
-      window.alert("Registration successful");
-      console.log("Registration successful");
+      window.alert("User Registred Successfully");
+      console.log("User Registred Successfully");
 
       // Once registration is succesful, user should go to /login
       navigate("/login")
