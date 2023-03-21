@@ -1,0 +1,27 @@
+const jwt = require("jsonwebtoken");
+const User = require("../model/userSchema");
+
+const authenticate = async (req, res, next) => {
+  try {
+    const token = req.cookies.jwtoken;
+    const verifToken = jwt.verify(token, process.env.SECRET_KEY);
+
+    const rootUser = await User.findOne({
+      _id: verifToken._id,
+      "tokens:token": token,
+    });
+    if (!rootUser) {
+      throw new Error("User npt found.");
+    }
+    req.token = token;
+    req.rootUser = rootUser;
+    req.userId = rootUser._id;
+
+    next();
+  } catch (error) {
+    res.staus(401).send("Unauthorized user");
+    console.log(error);
+  }
+};
+
+module.exports = authenticate;
