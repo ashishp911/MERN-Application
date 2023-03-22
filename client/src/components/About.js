@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import photo from "../Images/user.png";
+import Patil_Image from "../Images/Patil_Image.JPG";
 import photo2 from "../Images/user3.png";
 
 
 const About = () => {
   const navigate = useNavigate();
 
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState({});
 
   const callAboutPage = async () => {
     try {
@@ -48,7 +48,7 @@ const About = () => {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      padding: "2rem",
+      padding: "1rem",
       boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
       borderRadius: "1rem",
       backgroundColor: "#f5f5f5",
@@ -58,8 +58,8 @@ const About = () => {
       flexDirection: "column",
       justifyContent: "left",
       alignItems: "left",
-      padding: "2rem",
-      // boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+      padding: "1rem",
+      boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
       borderRadius: "1rem",
       backgroundColor: "#f5f5f5",
     },
@@ -78,7 +78,7 @@ const About = () => {
       <div style={styles.container}>
         <form method="GET">
           <img
-            src={photo2}
+            src={userData.name === 'Ashish Patil' ? Patil_Image : photo2}
             alt="No pic"
             style={{ display: "block", margin: "auto" }}
           />
