@@ -13,20 +13,48 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 const theme = createTheme();
 
 const Contact = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [message, setMessage] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // TODO: Handle form submission
-    console.log("Form submitted");
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   // TODO: Handle form submission
+  //   console.log("Form submitted");
+  // };
+
+  // const navigate = useNavigate();
+
+  const [userData, setUserData] = useState({});
+
+  const userContact = async () => {
+    try {
+      const response = await fetch("/getData", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      const data = await response.json();
+      // console.log(data);
+      setUserData(data)
+      if (!response.status === 200) {
+        throw new Error(response.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
+  useEffect(() => {
+    userContact();
+  }, []);
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -49,9 +77,10 @@ const Contact = () => {
             <Box
               component="form"
               id="contact-form"
-              onSubmit={handleSubmit}
+              // onSubmit={handleSubmit}
               noValidate
               sx={{ mt: 4, width: 700 }}
+              method = "GET"
             >
               <TextField
                 label="Name"
@@ -62,7 +91,7 @@ const Contact = () => {
                 fullWidth
                 autoFocus
                 type = "text"
-                value={name}
+                value={userData.name}
               />
               <TextField
                 margin="normal"
@@ -73,7 +102,7 @@ const Contact = () => {
                 id="contact_form_email"
                 autoComplete="email"
                 autoFocus
-                value={email}
+                value={userData.email}
                 type = "email"
               />
               <TextField
@@ -84,6 +113,7 @@ const Contact = () => {
                 required
                 fullWidth
                 autoFocus
+                value={userData.phone}
                 type = "number"
               />
               <TextField
@@ -94,9 +124,9 @@ const Contact = () => {
                 required
                 multiline
                 rows={6}
-                value={message}
+                // value={message}
                 type = "text"
-                onChange={(event) => setMessage(event.target.value)}
+                // onChange={(event) => setMessage(event.target.value)}
               />
 
               <Button
@@ -118,11 +148,11 @@ const Contact = () => {
             <div className="row">
               <div className="col-4">
                 <h4>Phone</h4>
-                <h5>716-999-9990</h5>
+                <h5>{userData.phone}</h5>
               </div>
               <div className="col-4">
                 <h4>Email</h4>
-                <h5>xyz@patil.com</h5>
+                <h5>{userData.email}</h5>
               </div>
               <div className="col-4">
                 <h4>Address</h4>

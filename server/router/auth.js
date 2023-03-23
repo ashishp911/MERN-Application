@@ -79,4 +79,9 @@ router.get("/about", authenticate, (req, res) => {
   res.send(req.rootUser)
 });
 
+// Get user data for Contact page and Home page
+router.get("/getData", authenticate, (req, res) => {
+  res.send(req.rootUser)
+})
+
 module.exports = router;
