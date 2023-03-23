@@ -84,20 +84,19 @@ const About = () => {
           />
           <div style={styles.box}>
             <p style={styles.paragraph}>
-              Hi, my name is Ashish. I'm a FSE based in Buffalo, NY. 
+              Hi, my name is {userData.name}. I'm a {userData.work} based in Buffalo, NY. 
               Lorem ipsum dolor sitamet consectetur adipisicing elit. Laudantium doloribus facere labore tempora eveniet maxime aut officia sunt nihil voluptates
               quod, quaerat, atque mollitia id fugit excepturi accusamus. Exercitationem illum magni eum.
               My Contact details are as follows
             </p>
-            <br />
           </div>
           <div style={styles.box2}>
             <p style={styles.paragraph}>Contact details</p>
             <ul>
-              <li style={styles.paragraph}>Name : </li>
-              <li style={styles.paragraph}>Email Id : </li>
-              <li style={styles.paragraph}>Profession : </li>
-              <li style={styles.paragraph}>Phone Number : </li>
+              <li style={styles.paragraph}>Name : {userData.name}</li>
+              <li style={styles.paragraph}>Email Id : {userData.email}</li>
+              <li style={styles.paragraph}>Profession : {userData.work}</li>
+              <li style={styles.paragraph}>Phone Number : {userData.phone}</li>
 
             </ul>
           </div>
