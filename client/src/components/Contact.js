@@ -13,24 +13,19 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 const theme = createTheme();
 
 const Contact = () => {
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [message, setMessage] = useState("");
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   // TODO: Handle form submission
-  //   console.log("Form submitted");
-  // };
-
-  // const navigate = useNavigate();
-
-  const [userData, setUserData] = useState({});
+  //  Saving message to a state.
+  // const [userMessage, setUserMessage] = useState("");
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
 
   const userContact = async () => {
     try {
@@ -43,7 +38,12 @@ const Contact = () => {
       });
       const data = await response.json();
       // console.log(data);
-      setUserData(data)
+      setUserData({
+        ...userData,
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+      });
       if (!response.status === 200) {
         throw new Error(response.error);
       }
@@ -55,6 +55,36 @@ const Contact = () => {
   useEffect(() => {
     userContact();
   }, []);
+
+  const handleInputs = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    setUserData({ ...userData, [name]: value });
+  };
+
+  // Sending the data to backend
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // TODO: Handle form submission
+    // console.log(userData);
+    const {name, email, phone, message} = userData
+    const response = await fetch('/contact', {
+      method:"POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({name, email, phone, message}),
+    })
+    const data = await response.json()
+    if(!data){
+      console.log("Message not sent");
+    }
+    else{
+      window.alert("Message sent")
+      setUserData({...userData, message:""})
+    }
+  };
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -77,44 +107,46 @@ const Contact = () => {
             <Box
               component="form"
               id="contact-form"
-              // onSubmit={handleSubmit}
               noValidate
               sx={{ mt: 4, width: 700 }}
-              method = "GET"
+              method="POST"
             >
               <TextField
                 label="Name"
-                name="contact_form_name"
+                name="name"
                 id="contact_form_name"
                 autoComplete="off"
                 required
                 fullWidth
                 autoFocus
-                type = "text"
+                type="text"
                 value={userData.name}
+                onChange={handleInputs}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 label="Email Address"
-                name="contact_form_email"
+                name="email"
                 id="contact_form_email"
                 autoComplete="email"
                 autoFocus
                 value={userData.email}
-                type = "email"
+                type="email"
+                onChange={handleInputs}
               />
               <TextField
                 label="Phone Number"
-                name="contact_form_pnumber"
+                name="phone"
                 id="contact_form_pnumber"
                 autoComplete="off"
                 required
                 fullWidth
                 autoFocus
                 value={userData.phone}
-                type = "number"
+                type="number"
+                onChange={handleInputs}
               />
               <TextField
                 label="Message"
@@ -123,16 +155,18 @@ const Contact = () => {
                 margin="normal"
                 required
                 multiline
+                name="message"
                 rows={6}
-                // value={message}
-                type = "text"
-                // onChange={(event) => setMessage(event.target.value)}
+                value={userData.message}
+                type="text"
+                onChange={handleInputs}
               />
 
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
+                onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Contact Us
