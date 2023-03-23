@@ -94,11 +94,11 @@ router.post("/contact", authenticate, async (req, res) => {
     }
       const userContact = await User.findOne({ _id: req.userId });
       if(userContact){
-        const userMessage = await userContact.addMessage(name, email, phone, message);
+        const userMessage = await userContact.addMessage(message);
         await userContact.save()
         res.status(201).json({Message : "User contact successful"})
       }
-      
+
   } catch (error) {
     console.log(error);
   }

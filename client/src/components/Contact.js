@@ -80,7 +80,7 @@ const Contact = () => {
       console.log("Message not sent");
     }
     else{
-      window.alert("Message sent")
+      window.alert("Message sent successfully")
       setUserData({...userData, message:""})
     }
   };
