@@ -16,9 +16,13 @@ import Paper from "@mui/material/Paper";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { userContext } from "../App";
+import { useContext } from "react";
 const theme = createTheme();
 
 const Login = () => {
+  const { state, dispatch } = useContext(userContext);
+
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     login_email: "",
@@ -36,7 +40,7 @@ const Login = () => {
     const { login_email, login_password } = userData;
     const res = await fetch("/login", {
       method: "POST",
-      credentials: 'include',
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -48,9 +52,10 @@ const Login = () => {
       window.alert("Invalid Credentials");
       console.log("Registration failed");
     } else {
+      dispatch({ type: "USER", payload: true});
       window.alert("User logged in  successfully");
       console.log("User logged in successfully");
-      navigate("/")
+      navigate("/");
     }
   };
 
