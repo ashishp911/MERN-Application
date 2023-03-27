@@ -38,7 +38,6 @@ router.post("/register", async (req, res) => {
 });
 
 // Now to validate login creds
-
 router.post("/login", async (req, res) => {
   // console.log(req.body);
   // res.send({message : "Awesome"})
@@ -48,7 +47,7 @@ router.post("/login", async (req, res) => {
       console.log("HERE1");
       return res.status(400).json({ Error: "Please fill all fields." });
     }
-
+    
     const userEmail = await User.findOne({ email: email });
 
     if (userEmail) {
