@@ -35,7 +35,7 @@ const Home = () => {
       justifyContent: "center",
       alignItems: "center",
       height: "90vh",
-      fontFamily: "Roboto, sans-serif",
+      fontFamily: "Pacifico ",
       textAlign: "center",
       backgroundColor: "#bee7f8",
     },
