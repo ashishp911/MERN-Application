@@ -4,16 +4,11 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 const theme = createTheme();
 
@@ -205,7 +200,7 @@ const Contact = () => {
             className="text-dark"
             href="https://en.wikipedia.org/wiki/April_Fools%27_Day"
           >
-            xyzpatil.com
+            patil.com
           </a>
         </div>
       </footer>

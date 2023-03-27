@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Patil_Image from "../Images/Patil_Image.JPG";
 import photo2 from "../Images/user3.png";
 
-
 const About = () => {
   const navigate = useNavigate();
 
